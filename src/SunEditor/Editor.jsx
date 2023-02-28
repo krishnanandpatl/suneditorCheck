@@ -3,18 +3,11 @@ import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import plugins from "suneditor/src/plugins";
 
-function Editor() {
+function Editor({initialContent,onSubmit}) {
 //   const editorRef = useRef(null);
+  const [content,setContent]=useState(initialContent);
 
-  const abc ="<p>hiiiiiiiii</p>"
-
-  const editor = useRef();
-  const getSunEditorInstance = (sunEditor) => {
-    editor.current = sunEditor;
-    console.log(editor.current)
-    const abc=editor.current.core.getContents(true);
-    console.log(abc);
-  };
+  
 
   return (
     <>
@@ -22,8 +15,8 @@ function Editor() {
     //   ref={editorRef}
       height={innerHeight*2/3}
         name="Profrma Invoice"
-        getSunEditorInstance={getSunEditorInstance}
-        defaultValue={abc}
+        // getSunEditorInstance={getSunEditorInstance}
+        setContents={initialContent}
         setOptions={{
           plugins: plugins,
           buttonList: [
@@ -233,7 +226,9 @@ function Editor() {
             ],
           ],
         }}
+        onChange={setContent}
       />
+      <div>{content}</div>
       <button > Export Html</button>
     </>
   );
